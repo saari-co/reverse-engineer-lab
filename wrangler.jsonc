@@ -10,7 +10,8 @@
   "preview_urls": false,
   "vars": {
     "CATALOG_ORIGIN": "https://reverseengineerlab.com",
-    "EMDASH_SITE_URL": "https://reverseengineerlab.com"
+    "EMDASH_SITE_URL": "https://reverseengineerlab.com",
+    "CF_ACCESS_AUDIENCE": "b55412d5c7635c7416f322b6f8cd299d0552ba4ef9fa7d7f55ac3b8497365a7d"
   },
   "d1_databases": [
     {
@@ -33,5 +34,11 @@
   "observability": {
     "enabled": true,
     "head_sampling_rate": 0.1
-  }
+  },
+  "routes": [
+    {
+      "pattern": "reverseengineerlab.com",
+      "custom_domain": true
+    }
+  ]
 }

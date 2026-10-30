@@ -40,5 +40,11 @@
       "pattern": "reverseengineerlab.com",
       "custom_domain": true
     }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "53ebb9197ef646d6a1ac6b3954788bb8"
+    }
   ]
 }

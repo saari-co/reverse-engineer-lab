@@ -39,6 +39,10 @@
     {
       "pattern": "reverseengineerlab.com",
       "custom_domain": true
+    },
+    {
+      "pattern": "www.reverseengineerlab.com",
+      "custom_domain": true
     }
   ],
   "kv_namespaces": [

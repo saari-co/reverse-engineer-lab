@@ -1,0 +1,11 @@
+export const researchPresentation: Record<string, { title: string; steps: string[]; related: string[] }> = {
+  'digits-source-ledger-boundary': {title:'Digits source-to-ledger model',steps:['Source identity','Processing and matching','Ledger result'],related:['campfire-journals-and-bank-feeds','doss-workflow-data-boundary']},
+  'campfire-journals-and-bank-feeds': {title:'Campfire bank feeds and journals',steps:['Bank event','Accounting decision','Journal and lines'],related:['digits-source-ledger-boundary','woocommerce-store-api-and-order-storage']},
+  'doss-workflow-data-boundary': {title:'DOSS workflows and shared data',steps:['Shared record','Trigger and conditions','Recorded decision'],related:['katana-inventory-quantities','campfire-journals-and-bank-feeds']},
+  'katana-inventory-quantities': {title:'Katana inventory quantities',steps:['Variant + location','On hand / committed / expected','Explicit availability model'],related:['shiptheory-shipment-service-rules','woocommerce-store-api-and-order-storage']},
+  'shiptheory-shipment-service-rules': {title:'Shiptheory shipment lifecycle',steps:['Shipment description','Service selection','Booking and label result'],related:['katana-inventory-quantities','shopify-graphql-cost-and-cursors']},
+  'shopify-graphql-cost-and-cursors': {title:'Shopify GraphQL costs and cursors',steps:['Query and cost budget','Page and pageInfo','Checkpoint and next cursor'],related:['klaviyo-revisions-and-rate-limits','notion-database-data-source-split']},
+  'klaviyo-revisions-and-rate-limits': {title:'Klaviyo revisions and rate limits',steps:['Endpoint + revision','Burst and steady windows','Classified outcome'],related:['shopify-graphql-cost-and-cursors','notion-database-data-source-split']},
+  'woocommerce-store-api-and-order-storage': {title:'WooCommerce Store API and HPOS',steps:['Storefront / merchant boundary','Supported order interface','Selected order storage'],related:['katana-inventory-quantities','shiptheory-shipment-service-rules']},
+  'notion-database-data-source-split': {title:'Notion databases and data sources',steps:['Database container','Selected source and schema','Pages and property values'],related:['shopify-graphql-cost-and-cursors','doss-workflow-data-boundary']}
+};

@@ -1,0 +1,364 @@
+{
+  "version": "1",
+  "meta": {
+    "name": "Reverse Engineer Lab",
+    "description": "An independent catalog of reverse engineering research."
+  },
+  "settings": {
+    "title": "Reverse Engineer Lab",
+    "tagline": "Reverse engineering, with receipts."
+  },
+  "collections": [
+    {
+      "slug": "distillations",
+      "label": "Distillations",
+      "labelSingular": "Distillation",
+      "supports": [
+        "drafts",
+        "revisions",
+        "search"
+      ],
+      "urlPattern": "/entries/{slug}",
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "searchable": true
+        },
+        {
+          "slug": "target",
+          "label": "Target / project",
+          "type": "string",
+          "searchable": true
+        },
+        {
+          "slug": "target_version",
+          "label": "Version / revision",
+          "type": "string",
+          "searchable": false
+        },
+        {
+          "slug": "kind",
+          "label": "Target type",
+          "type": "select",
+          "searchable": false,
+          "validation": {
+            "options": [
+              "Web application",
+              "Native application",
+              "Library / protocol",
+              "Other"
+            ]
+          }
+        },
+        {
+          "slug": "question",
+          "label": "Investigation question",
+          "type": "text",
+          "searchable": true
+        },
+        {
+          "slug": "summary",
+          "label": "Findings summary",
+          "type": "text",
+          "searchable": true
+        },
+        {
+          "slug": "observed",
+          "label": "Observed",
+          "type": "text",
+          "searchable": false
+        },
+        {
+          "slug": "inferred",
+          "label": "Inferred",
+          "type": "text",
+          "searchable": false
+        },
+        {
+          "slug": "unknown",
+          "label": "Unknown & limitations",
+          "type": "text",
+          "searchable": false
+        },
+        {
+          "slug": "author",
+          "label": "Author",
+          "type": "string",
+          "searchable": false
+        },
+        {
+          "slug": "investigated_at",
+          "label": "Investigation date",
+          "type": "string",
+          "searchable": false
+        },
+        {
+          "slug": "links",
+          "label": "Public evidence links (one per line)",
+          "type": "text",
+          "searchable": false
+        },
+        {
+          "slug": "architecture",
+          "label": "Architecture",
+          "type": "text",
+          "searchable": false
+        },
+        {
+          "slug": "models",
+          "label": "Domain & data models",
+          "type": "text",
+          "searchable": false
+        },
+        {
+          "slug": "workflows",
+          "label": "Workflows & state machines",
+          "type": "text",
+          "searchable": false
+        },
+        {
+          "slug": "apis",
+          "label": "API & protocol surfaces",
+          "type": "text",
+          "searchable": false
+        }
+      ]
+    }
+  ],
+  "menus": [
+    {
+      "name": "primary",
+      "label": "Primary navigation",
+      "items": [
+        {
+          "type": "custom",
+          "label": "Catalog",
+          "url": "/"
+        },
+        {
+          "type": "custom",
+          "label": "About",
+          "url": "/about"
+        },
+        {
+          "type": "custom",
+          "label": "Submit research",
+          "url": "/submit"
+        }
+      ]
+    }
+  ],
+  "content": {
+    "distillations": [
+      {
+        "id": "initial-digits-source-ledger-boundary",
+        "slug": "digits-source-ledger-boundary",
+        "status": "published",
+        "data": {
+          "title": "Digits: source transactions and the ledger are different layers",
+          "target": "Digits",
+          "target_version": "Connect API v1; public documentation reviewed 2026-10-30",
+          "kind": "Web application",
+          "question": "How does raw transaction ingestion relate to the accounting ledger?",
+          "summary": "Digits exposes a source layer for incoming financial records and a ledger layer for processed accounting results. That separation is the useful contract: ingestion is not a promise that a matching ledger entry is immediately available.",
+          "observed": "The public documentation distinguishes Sources from the Ledger. Source records retain external identifiers; matching groups records that represent the same economic event. The Connect API exposes separate source-transaction and ledger read operations.",
+          "inferred": "This boundary suggests that a consumer should distinguish receipt of source data from completion of bookkeeping processing. That is an interpretation of the documented model, not a measurement of processing latency.",
+          "unknown": "Public documentation analysis only. No customer ledger, authenticated account, processing-latency test, or internal implementation is published here.",
+          "author": "Reverse Engineer Lab",
+          "investigated_at": "2026-10-30",
+          "links": "https://developer.digits.com/docs/source-vs-ledger\nhttps://developer.digits.com/docs/identifiers\nhttps://developer.digits.com/docs/matching\nhttps://developer.digits.com/llms.txt",
+          "architecture": "",
+          "models": "Source, external identifier, transaction and ledger are distinct concepts. A source record is evidence of an upstream event; a ledger view represents its accounting treatment.",
+          "workflows": "",
+          "apis": ""
+        }
+      },
+      {
+        "id": "initial-campfire-journals-and-bank-feeds",
+        "slug": "campfire-journals-and-bank-feeds",
+        "status": "published",
+        "data": {
+          "title": "Campfire: journal entries and bank-feed ingestion have separate roles",
+          "target": "Campfire",
+          "target_version": "Public API documentation reviewed 2026-10-30",
+          "kind": "Web application",
+          "question": "Which accounting objects anchor Campfire\u2019s integration surface?",
+          "summary": "Campfire exposes journal-entry workflows alongside bank-feed ingestion, bills and invoices. The public contract also documents a bank-sync mode that records transactions without immediately creating journals.",
+          "observed": "The API documentation includes journal-entry creation, accounts-payable and accounts-receivable workflows. Its bank-feed endpoint documents an optional skip-journal behavior. OAuth apps and webhooks are separate integration features.",
+          "inferred": "The separation makes a bank transaction and its eventual accounting journal different lifecycle objects. A successful feed import alone should not be read as proof of a posted journal.",
+          "unknown": "This entry describes public contracts, not the vendor\u2019s database schema or customer configuration. It does not establish reconciliation accuracy, authorization behavior, or transaction atomicity through runtime testing.",
+          "author": "Reverse Engineer Lab",
+          "investigated_at": "2026-10-30",
+          "links": "https://docs.campfire.ai/guides/journal-entries\nhttps://docs.campfire.ai/api-reference/cash-management/post-bank-feed\nhttps://docs.campfire.ai/guides/webhooks\nhttps://docs.campfire.ai/llms.txt",
+          "architecture": "",
+          "models": "",
+          "workflows": "",
+          "apis": ""
+        }
+      },
+      {
+        "id": "initial-doss-workflow-data-boundary",
+        "slug": "doss-workflow-data-boundary",
+        "status": "published",
+        "data": {
+          "title": "DOSS: workflows connect records, events and operational decisions",
+          "target": "DOSS",
+          "target_version": "Public platform description reviewed 2026-10-30",
+          "kind": "Web application",
+          "question": "What is the public boundary between DOSS data and workflow automation?",
+          "summary": "DOSS presents operational workflows as event- or schedule-triggered processes over shared data. Public examples connect purchase-order approval, order routing and document matching rather than treating each module as a separate automation product.",
+          "observed": "The public workflow page describes branching, iteration, formulas, document parsing, AI steps and execution logs. The platform separately presents inventory, order management and shared master-data modules.",
+          "inferred": "The published interface suggests a configurable process layer over operational records. It does not, by itself, prove a particular database engine, graph representation, execution guarantee or transaction model.",
+          "unknown": "Coverage is the publicly described product contract. The detailed customer documentation requires authentication; no private customer data, captured session, or unsupported internal schema is included.",
+          "author": "Reverse Engineer Lab",
+          "investigated_at": "2026-10-30",
+          "links": "https://www.doss.com/platform/workflows\nhttps://www.doss.com/modules/inventory-management\nhttps://www.doss.com/modules/unified-master-data",
+          "architecture": "",
+          "models": "",
+          "workflows": "The documented examples use events or schedules to trigger steps, with conditional branches and a visible execution history. The exact retry and concurrency guarantees remain unverified.",
+          "apis": ""
+        }
+      },
+      {
+        "id": "initial-katana-inventory-quantities",
+        "slug": "katana-inventory-quantities",
+        "status": "published",
+        "data": {
+          "title": "Katana: stock on hand, committed and expected are separate quantities",
+          "target": "Katana",
+          "target_version": "Public API v1; reviewed 2026-10-30",
+          "kind": "Web application",
+          "question": "Why can a single inventory number fail to explain product availability?",
+          "summary": "Katana\u2019s inventory model distinguishes on-hand, committed and expected stock per variant and location. This exposes future obligations and incoming supply separately from what is physically held.",
+          "observed": "The inventory object documents quantity_in_stock, quantity_committed and quantity_expected. Sales and manufacturing orders create commitments; purchasing and manufacturing contribute expected supply. A sales-order row can link to a make-to-order manufacturing order.",
+          "inferred": "Availability is a relationship among stock, demand and future supply rather than one universal count. The API model alone does not prove reservation ordering or race-free allocation.",
+          "unknown": "Public schema and workflow analysis. No live warehouse or order was changed. Costing behavior, concurrent reservations and exception handling were not reproduced.",
+          "author": "Reverse Engineer Lab",
+          "investigated_at": "2026-10-30",
+          "links": "https://developer.katanamrp.com/reference/the-inventory-object\nhttps://developer.katanamrp.com/reference/the-sales-order-row-object\nhttps://developer.katanamrp.com/reference/list-all-sales-orders",
+          "architecture": "",
+          "models": "Inventory is identified by product/material variant and location. Quantities track physical stock, commitments and expected replenishment separately.",
+          "workflows": "",
+          "apis": ""
+        }
+      },
+      {
+        "id": "initial-shiptheory-shipment-service-rules",
+        "slug": "shiptheory-shipment-service-rules",
+        "status": "published",
+        "data": {
+          "title": "Shiptheory: shipment booking sits behind service selection and shipping rules",
+          "target": "Shiptheory",
+          "target_version": "REST API v1; reviewed 2026-10-30",
+          "kind": "Web application",
+          "question": "How does Shiptheory separate shipment data from carrier-service decisions?",
+          "summary": "Shiptheory provides one API surface for shipment booking, labels, available services and shipping rules. The useful distinction is between describing a shipment and choosing how a carrier should handle it.",
+          "observed": "The public API documentation covers creating and searching shipments, delivery-service lists, package sizes, labels and return labels. The product API page describes rules based on destination, order value, product, weight and SKU.",
+          "inferred": "A shipment record, service-selection decision and returned label are distinct outputs of the workflow. Receiving an API response should not be treated as evidence that a parcel has physically moved.",
+          "unknown": "Documentation-level coverage; no paid label, carrier booking, shipment cancellation or physical-delivery test was performed for this public entry. Carrier-specific behavior and account configuration may differ.",
+          "author": "Reverse Engineer Lab",
+          "investigated_at": "2026-10-30",
+          "links": "https://shiptheory.com/developer/\nhttps://shiptheory.com/api/\nhttps://support.shiptheory.com/support/solutions/articles/10125-shipping-rules-explained",
+          "architecture": "",
+          "models": "",
+          "workflows": "",
+          "apis": ""
+        }
+      },
+      {
+        "id": "initial-shopify-graphql-cost-and-cursors",
+        "slug": "shopify-graphql-cost-and-cursors",
+        "status": "published",
+        "data": {
+          "title": "Shopify: GraphQL query cost and cursor pagination define the read contract",
+          "target": "Shopify",
+          "target_version": "Admin GraphQL API 2026-10; public documentation reviewed 2026-10-30",
+          "kind": "Web application",
+          "question": "How do Shopify\u2019s API limits differ from a flat requests-per-minute model?",
+          "summary": "Shopify\u2019s Admin GraphQL API budgets query cost rather than treating every request as equal. Cursor pagination is a separate boundary: advancing a list requires its page information, not an invented numeric offset.",
+          "observed": "The public limits documentation distinguishes calculated GraphQL query cost from REST request buckets and Storefront protections. GraphQL responses expose cost and throttle information; the pagination guide documents cursors and pageInfo.",
+          "inferred": "Two requests can consume different capacity even when their HTTP shapes look similar. Pagination and throttling therefore need separate interpretation. This entry does not benchmark a store or plan.",
+          "unknown": "Public API contract analysis. No merchant identifiers, private store state, authenticated traces or pending research additions are included. Live capacity can vary by API, plan and platform conditions.",
+          "author": "Reverse Engineer Lab",
+          "investigated_at": "2026-10-30",
+          "links": "https://shopify.dev/docs/api/usage/limits\nhttps://shopify.dev/docs/api/usage/pagination-graphql\nhttps://shopify.dev/docs/api/admin-graphql/2026-10",
+          "architecture": "",
+          "models": "",
+          "workflows": "",
+          "apis": "The documented GraphQL read surface uses query selections and connections. Throttle metadata describes available query capacity; pageInfo describes position within a connection."
+        }
+      },
+      {
+        "id": "initial-klaviyo-revisions-and-rate-limits",
+        "slug": "klaviyo-revisions-and-rate-limits",
+        "status": "published",
+        "data": {
+          "title": "Klaviyo: API revision and rate-limit tier are explicit contract inputs",
+          "target": "Klaviyo",
+          "target_version": "API revision 2026-10-15; public documentation reviewed 2026-10-30",
+          "kind": "Web application",
+          "question": "What determines the behavior and throughput of a Klaviyo API call?",
+          "summary": "Klaviyo versions its API with dated revision headers and publishes endpoint-specific rate limits. Treating every endpoint as one timeless contract or one shared throughput limit loses information present in the interface.",
+          "observed": "The changelog identifies revision 2026-10-15 and documents endpoint changes. The developer documentation separates burst and steady rate limits and describes responses for rate-limit errors.",
+          "inferred": "A stored request description needs its revision as well as its endpoint to be reproducible. A caller\u2019s queueing behavior must account for the endpoint\u2019s documented limit tier rather than just counting all calls together.",
+          "unknown": "Public documentation and schema-level analysis. No profile, consent record, message, campaign or customer account was accessed or changed. This does not verify delivery, attribution or identity-merging behavior.",
+          "author": "Reverse Engineer Lab",
+          "investigated_at": "2026-10-30",
+          "links": "https://developers.klaviyo.com/en/docs/changelog_\nhttps://developers.klaviyo.com/en/docs/rate_limits_and_error_handling\nhttps://github.com/klaviyo/openapi",
+          "architecture": "",
+          "models": "",
+          "workflows": "",
+          "apis": ""
+        }
+      },
+      {
+        "id": "initial-woocommerce-store-api-and-order-storage",
+        "slug": "woocommerce-store-api-and-order-storage",
+        "status": "published",
+        "data": {
+          "title": "WooCommerce: storefront API and order storage are independent boundaries",
+          "target": "WooCommerce",
+          "target_version": "WooCommerce 11.2.1 research baseline; Store API v1 documentation",
+          "kind": "Web application",
+          "question": "Does the presence of the Store API determine how orders are stored?",
+          "summary": "WooCommerce separates its customer-facing Store API from its order-storage implementation. A storefront API route and the choice between legacy posts and High-Performance Order Storage answer different questions.",
+          "observed": "The Store API documents product, cart and checkout operations scoped to a customer session. HPOS documents dedicated order tables and a compatibility/synchronization path from posts-based storage. The public guidance distinguishes the Store API from the authenticated management REST API.",
+          "inferred": "A route inventory alone cannot establish which storage engine is authoritative, and storage selection alone does not establish which checkout interface a storefront uses.",
+          "unknown": "Only public platform contracts are described. No merchant domain, extension inventory, customer data or production configuration is included. Compatibility and live checkout behavior must be established per installation.",
+          "author": "Reverse Engineer Lab",
+          "investigated_at": "2026-10-30",
+          "links": "https://developer.woocommerce.com/docs/apis/store-api/\nhttps://woocommerce.com/document/high-performance-order-storage/\nhttps://github.com/woocommerce/woocommerce/tree/11.2.1",
+          "architecture": "",
+          "models": "The cart and checkout are session-facing resources. HPOS stores orders in purpose-built tables while compatibility mode can synchronize legacy representations.",
+          "workflows": "",
+          "apis": ""
+        }
+      },
+      {
+        "id": "initial-notion-database-data-source-split",
+        "slug": "notion-database-data-source-split",
+        "status": "published",
+        "data": {
+          "title": "Notion: a database container is not the same as a data source",
+          "target": "Notion",
+          "target_version": "API model introduced in 2025-09-03; reviewed 2026-10-30",
+          "kind": "Web application",
+          "question": "What changed when Notion introduced multi-source databases?",
+          "summary": "Notion split the database container from the data sources it contains. The practical consequence is that database identity alone no longer identifies a single queryable schema in every case.",
+          "observed": "The upgrade guide introduces first-class multi-source databases. It directs clients to discover data_source_id values and use them for operations that previously relied on database_id, including page parents, queries and relations.",
+          "inferred": "A container-level identifier and a schema-bearing data-source identifier have different jobs. Assuming one source per database is a compatibility assumption, not a timeless platform invariant.",
+          "unknown": "Public API migration analysis, not a claim about the internal storage engine. No private workspace, record map, billing data, agent vault or authenticated capture is published. Later API versions may add further changes.",
+          "author": "Reverse Engineer Lab",
+          "investigated_at": "2026-10-30",
+          "links": "https://developers.notion.com/guides/get-started/upgrade-guide-2025-09-03\nhttps://developers.notion.com/reference/data-source\nhttps://developers.notion.com/reference/database",
+          "architecture": "",
+          "models": "",
+          "workflows": "",
+          "apis": ""
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+import assert from 'node:assert/strict';
+const origin=new URL(process.argv[2]||'http://127.0.0.1:4324').origin;
+const queue=['/'],seen=new Set();
+while(queue.length){const path=queue.shift();if(seen.has(path))continue;seen.add(path);assert(!/%2f/i.test(path));const r=await fetch(origin+path);assert.equal(r.status,200,path);const html=await r.text();assert(!html.includes('There is no page at this address'));if(path==='/')assert(html.includes('data-content-source="emdash"'));for(const m of html.matchAll(/href="([^"]+)"/g)){const u=new URL(m[1].replaceAll('&amp;','&'),origin);if(u.origin===origin&&!u.pathname.startsWith('/_emdash')&&!u.pathname.startsWith('/_astro')&&!m[1].startsWith('#'))queue.push(u.pathname+u.search);}}
+const admin=await fetch(origin+'/_emdash/api/plugins/rea-catalog/admin',{method:'POST',headers:{'Content-Type':'application/json','X-EmDash-Request':'1'},body:JSON.stringify({type:'page_load',page:'/review'})});assert([401,403].includes(admin.status));
+const sitemap=await fetch(origin+'/sitemap.xml');assert.equal(sitemap.status,200);const xml=await sitemap.text();for(const [,value] of xml.matchAll(/<loc>([^<]+)<\/loc>/g)){assert(!/%2f/i.test(value));assert.equal((await fetch(value)).status,200);}
+const robots=await (await fetch(origin+'/robots.txt')).text();assert(robots.includes('Sitemap:')||robots.includes('Disallow: /\n'));
+console.log(JSON.stringify({passed:true,origin,routes:[...seen],anonymousAdmin:admin.status,sitemap:true,robots:true},null,2));

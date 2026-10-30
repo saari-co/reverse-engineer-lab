@@ -1,0 +1,2 @@
+import {canonicalOrigin,publishedEntries} from '../lib/catalog';
+export async function GET(){const origin=canonicalOrigin();const entries=await publishedEntries();const escape=(s:string)=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');return new Response(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${origin?['/','/about',...entries.map(e=>'/entries/'+encodeURIComponent(e.id))].map(p=>`<url><loc>${escape(origin+p)}</loc></url>`).join(''):''}</urlset>`,{headers:{'Content-Type':'application/xml'}});}

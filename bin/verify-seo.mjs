@@ -12,7 +12,7 @@ assert(robots.includes('Sitemap: '+origin+'/sitemap.xml'));
 assert(!robots.includes('Disallow: /?')&&!robots.includes('Disallow: /submit'));
 const sitemap=await(await fetch(origin+'/sitemap.xml')).text();
 const urls=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(x=>x[1]);
-assert.equal(urls.filter(u=>u.includes('/entries/')).length,9);
+assert.equal(urls.filter(u=>u.includes('/entries/')).length,19);
 for(const url of urls){
  assert(url.startsWith(origin+'/'));
  const r=await fetch(url);assert.equal(r.status,200,url);const html=await r.text();
@@ -34,7 +34,7 @@ for(const path of ['/submit','/?q=Katana']){
  const r=await fetch(origin+path);const html=await r.text();assert(html.includes('noindex, follow'));
  assert.equal(r.headers.get('x-robots-tag'),'noindex, follow');
 }
-const image=await fetch(origin+'/social-card.png');assert.equal(image.status,200);assert(image.headers.get('content-type')?.includes('image/png'));report.image=true;
-const missing=await fetch(origin+'/not-a-real-rel-page');assert.equal(missing.status,404);
-const admin=await fetch(origin+'/_emdash/admin',{redirect:'manual'});assert.equal(admin.status,302);assert(new URL(admin.headers.get('location')).hostname.endsWith('.cloudflareaccess.com'));report.adminProtected=true;
+const image=await fetch(origin+'/social-card.png');assert.equal(image.status,200);assert(image.headers.get('content-type')?.includes('image/png'));await image.body?.cancel();report.image=true;
+const missing=await fetch(origin+'/not-a-real-rel-page');assert.equal(missing.status,404);await missing.body?.cancel();
+const admin=await fetch(origin+'/_emdash/admin',{redirect:'manual'});assert.equal(admin.status,302);assert(new URL(admin.headers.get('location')).hostname.endsWith('.cloudflareaccess.com'));await admin.body?.cancel();report.adminProtected=true;
 console.log(JSON.stringify(report,null,2));

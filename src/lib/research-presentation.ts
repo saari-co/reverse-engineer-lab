@@ -97,6 +97,11 @@ export const researchPresentation: Record<string, { title: string; steps: string
   'signal-pqxdh-sealed-sender-and-linked-device-boundaries': {
     title: 'Signal PQXDH, Sealed Sender v2 and linked devices',
     steps: ['PQXDH + SPQR Triple Ratchet', 'Sealed Sender v2 + zkgroup', 'Primary vs linked-device sync'],
-    related: ['grok-bot-sand-coordinator-and-vm-boundaries', 'chatgpt-codex-quicksilver-webrtc-and-sonora-voice', 'antigravity-thinker-talker-voice-tunnel']
+    related: ['discord-bootstrap-asar-gateway-v10-and-dave-mls', 'grok-bot-sand-coordinator-and-vm-boundaries', 'chatgpt-codex-quicksilver-webrtc-and-sonora-voice']
+  },
+  'discord-bootstrap-asar-gateway-v10-and-dave-mls': {
+    title: 'Discord bootstrap ASAR, Gateway v10 and DAVE MLS',
+    steps: ['Bootstrap ASAR + Rust discore', 'Gateway v10 + Components v2', 'DAVE MLS E2EE + Activities SDK'],
+    related: ['signal-pqxdh-sealed-sender-and-linked-device-boundaries', 'chatgpt-codex-quicksilver-webrtc-and-sonora-voice', 'grok-bot-sand-coordinator-and-vm-boundaries']
   }
 };

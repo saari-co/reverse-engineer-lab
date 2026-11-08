@@ -12,7 +12,7 @@ assert(robots.includes('Sitemap: '+origin+'/sitemap.xml'));
 assert(!robots.includes('Disallow: /?')&&!robots.includes('Disallow: /submit'));
 const sitemap=await(await fetch(origin+'/sitemap.xml')).text();
 const urls=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(x=>x[1]);
-assert.equal(urls.filter(u=>u.includes('/entries/')).length,20);
+assert.equal(urls.filter(u=>u.includes('/entries/')).length,21);
 for(const url of urls){
  assert(url.startsWith(origin+'/'));
  const r=await fetch(url);assert.equal(r.status,200,url);const html=await r.text();

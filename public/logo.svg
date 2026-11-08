@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none" role="img" aria-label="Reverse Engineer Lab Split Black-Box Prism mark">
+  <defs>
+    <linearGradient id="c2-seam" x1="8" y1="5" x2="18" y2="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4CC38A"/>
+      <stop offset="48%" stop-color="#E6A23C"/>
+      <stop offset="100%" stop-color="#4CC38A"/>
+    </linearGradient>
+    <linearGradient id="c2-shell-top" x1="6" y1="4" x2="28" y2="16" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#33423A"/>
+      <stop offset="100%" stop-color="#1E2823"/>
+    </linearGradient>
+    <linearGradient id="c2-shell-side" x1="4" y1="10" x2="16" y2="31" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#25312B"/>
+      <stop offset="100%" stop-color="#141B18"/>
+    </linearGradient>
+  </defs>
+  <!-- Rear Half of Split Black-Box -->
+  <path d="M17.5 3.5L23.2 6.6L11.4 13.4L5.5 10.2L17.5 3.5Z" fill="url(#c2-shell-top)" stroke="#485B51" stroke-width="1" stroke-linejoin="round"/>
+  <path d="M5.5 10.2L11.4 13.4V27.6L5.5 24.2V10.2Z" fill="url(#c2-shell-side)" stroke="#394941" stroke-width="1" stroke-linejoin="round"/>
+  <!-- Illuminated Disassembly Seam ("No Black Boxes") -->
+  <path d="M24.6 7.4L12.8 14.2V28.4" stroke="url(#c2-seam)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Front Half Chamfered Bezel + Visor Block -->
+  <path d="M26.2 8.3L31 11.1L19.2 17.9L14.4 15.1L26.2 8.3Z" fill="url(#c2-shell-top)" stroke="#53685D" stroke-width="1" stroke-linejoin="round"/>
+  <path d="M14.4 15.1L19.2 17.9V32.1L14.4 29.3V15.1Z" fill="#18211D" stroke="#3E5047" stroke-width="1" stroke-linejoin="round"/>
+  <!-- Front Chamfered Instrument Visor Frame -->
+  <path d="M19.2 17.9L31 11.1V25.3L19.2 32.1V17.9Z" fill="#1D2722" stroke="#53685D" stroke-width="1" stroke-linejoin="round"/>
+  <!-- Recessed Obsidian Visor Screen -->
+  <path d="M20.8 19.2L29.4 14.2V24.1L20.8 29.1V19.2Z" fill="#0B100E" stroke="#2B3932" stroke-width="0.9" stroke-linejoin="round"/>
+  <!-- Dual Horizontal Phosphor Visor Bar Eyes -->
+  <path d="M21.9 22.8L24.5 21.3V23.1L21.9 24.6V22.8Z" fill="#4CC38A"/>
+  <path d="M25.7 20.6L28.3 19.1V20.9L25.7 22.4V20.6Z" fill="#4CC38A"/>
+</svg>

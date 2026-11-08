@@ -14,5 +14,9 @@ test-results/
 runs/
 worker-configuration.d.ts
 
+.stitch/*
+!.stitch/DESIGN.md
+.grilltrack/work/
+
 .env
 .env.*

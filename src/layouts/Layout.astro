@@ -1,12 +1,321 @@
 ---
-import '../styles/site.css';
-import { getMenu } from 'emdash';
-import { canonicalOrigin,jsonLd } from '../lib/catalog';
-import { metaDescription } from '../lib/seo';
-const {title='Software Reverse Engineering Research | Reverse Engineer Lab',description='Explore evidence-linked reverse engineering research: architecture, APIs, data models, and workflows, with explicit observations and limitations.',noindex=false,structured,article=false}=Astro.props;
-const socialImage='https://reverseengineerlab.com/social-card.png';
-const safeDescription=metaDescription(description);
-const origin=canonicalOrigin();const canonical=origin?origin+Astro.url.pathname:null;
-const menu=await getMenu('primary');
+import "../styles/site.css";
+import { getMenu } from "emdash";
+import { canonicalOrigin, jsonLd } from "../lib/catalog";
+import { metaDescription } from "../lib/seo";
+
+const {
+  title = "Software Reverse Engineering Research | Reverse Engineer Lab",
+  description = "Explore evidence-linked reverse engineering research: architecture, APIs, data models, and workflows, with explicit observations and limitations.",
+  noindex = false,
+  structured,
+  article = false,
+} = Astro.props;
+
+const socialImage = "https://reverseengineerlab.com/social-card.png";
+const safeDescription = metaDescription(description);
+const origin = canonicalOrigin();
+const pathname = Astro.url.pathname;
+const canonical = origin ? origin + pathname : null;
+const menu = await getMenu("primary");
+const menuItems: Array<{ label: string; url: string }> = Array.isArray(menu?.items)
+  ? menu.items.map((item) => ({
+      label: String(item.label ?? ""),
+      url: String(item.url ?? "/"),
+    }))
+  : [];
 ---
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width"/><title>{title}</title><meta name="description" content={safeDescription}/><meta name="robots" content={noindex||!origin?'noindex, follow':'index, follow'}/>{canonical&&<link rel="canonical" href={canonical}/>}<meta property="og:title" content={title}/><meta property="og:description" content={safeDescription}/><meta property="og:type" content={article?'article':'website'}/>{canonical&&<meta property="og:url" content={canonical}/>}<meta property="og:site_name" content="Reverse Engineer Lab"/><meta property="og:image" content={socialImage}/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image:alt" content="Reverse Engineer Lab — software research connecting systems, public evidence and understanding."/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:image" content={socialImage}/><meta name="twitter:title" content={title}/><meta name="twitter:description" content={safeDescription}/><meta name="theme-color" content="#f3f0e8"/>{structured&&origin&&<script type="application/ld+json" set:html={jsonLd(structured)}/>}</head><body><a class="skip" href="#main">Skip to content</a><header><a class="brand" href="/" aria-label="Reverse Engineer Lab home"><span class="mark">r/e</span> REVERSE<span class="atlas">ENGINEER LAB</span></a><nav aria-label="Main navigation" data-content-source="emdash">{(menu?.items??[]).map((item:any)=><a href={item.url} class:list={['nav-link',{'nav-submit':item.url==='/submit'}]}>{item.label}{item.url==='/submit'&&<span aria-hidden="true"> ↗</span>}</a>)}</nav></header><main id="main"><slot/></main><footer><div><a class="brand small" href="/">REVERSE ENGINEER LAB</a><p>Know how it works. Know what you don't.</p></div><div><p>An independent research catalog.</p><p>Not affiliated with the Reverse Engineer Anything project.</p><a href="/_emdash/admin/plugins/rea-catalog/review">Editor sign in ↗</a></div></footer></body></html>
+<!doctype html>
+<html lang="en" data-theme="system">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={safeDescription} />
+    <meta name="robots" content={noindex || !origin ? "noindex, follow" : "index, follow"} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={safeDescription} />
+    <meta property="og:type" content={article ? "article" : "website"} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:site_name" content="Reverse Engineer Lab" />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Reverse Engineer Lab — software research connecting systems, public evidence and understanding."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={safeDescription} />
+    <meta name="theme-color" content="#e8ece9" id="rel-theme-color" />
+    <script is:inline>
+      (function () {
+        try {
+          var m = document.cookie.match(/(?:^|;\s*)rel-theme=(light|dark|system)/);
+          var saved = (m && m[1]) || localStorage.getItem("rel-theme") || "system";
+          var root = document.documentElement;
+          root.setAttribute("data-theme", saved);
+          var dark =
+            saved === "dark" ||
+            (saved === "system" &&
+              window.matchMedia &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+          root.setAttribute("data-resolved-theme", dark ? "dark" : "light");
+          var meta = document.getElementById("rel-theme-color");
+          if (meta) meta.setAttribute("content", dark ? "#111614" : "#e8ece9");
+        } catch (_) {}
+      })();
+    </script>
+    {structured && origin && <script type="application/ld+json" set:html={jsonLd(structured)} />}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="shell-inner header-bar">
+        <a class="brand" href="/" aria-label="Reverse Engineer Lab home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 36 36" fill="none">
+              <defs>
+                <linearGradient id="hdr-c2-seam" x1="8" y1="5" x2="18" y2="30" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#4CC38A" />
+                  <stop offset="50%" stop-color="#E6A23C" />
+                  <stop offset="100%" stop-color="#4CC38A" />
+                </linearGradient>
+              </defs>
+              <path d="M17.5 3.8L23 6.8L11.5 13.5L5.8 10.3L17.5 3.8Z" fill="#2A3831" stroke="#4D6157" stroke-width="1" stroke-linejoin="round" />
+              <path d="M5.8 10.3L11.5 13.5V27.4L5.8 24.1V10.3Z" fill="#1A231F" stroke="#394941" stroke-width="1" stroke-linejoin="round" />
+              <path d="M24.4 7.6L12.9 14.3V28.2" stroke="url(#hdr-c2-seam)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M26 8.5L30.6 11.2L19.1 17.9L14.5 15.2L26 8.5Z" fill="#314139" stroke="#5B7266" stroke-width="1" stroke-linejoin="round" />
+              <path d="M14.5 15.2L19.1 17.9V31.8L14.5 29.1V15.2Z" fill="#18211D" stroke="#41534A" stroke-width="1" stroke-linejoin="round" />
+              <path d="M19.1 17.9L30.6 11.2V25.1L19.1 31.8V17.9Z" fill="#0B100E" stroke="#5B7266" stroke-width="1.1" stroke-linejoin="round" />
+              <path d="M21.4 22.6L24.1 21V22.9L21.4 24.5V22.6Z" fill="#4CC38A" />
+              <path d="M25.4 20.3L28.1 18.7V20.6L25.4 22.2V20.3Z" fill="#4CC38A" />
+            </svg>
+          </span>
+          <span class="brand-text">
+            <span class="brand-name">Reverse <span>Engineer Lab</span></span>
+            <span class="brand-sub">Open Empirical Research Index</span>
+          </span>
+        </a>
+
+        <div class="header-controls">
+          <nav class="primary-nav" aria-label="Main navigation" data-content-source="emdash">
+            {
+              menuItems.map((item) => {
+                const isSubmit = item.url === "/submit";
+                const isActive =
+                  item.url === "/"
+                    ? pathname === "/" || pathname.startsWith("/entries/")
+                    : pathname === item.url;
+                return (
+                  <a
+                    href={item.url}
+                    aria-current={isActive ? "page" : undefined}
+                    class:list={["nav-link", { "nav-submit": isSubmit }]}
+                  >
+                    <span>{item.label}</span>
+                    {isSubmit && (
+                      <span class="arrow" aria-hidden="true">
+                        ↗
+                      </span>
+                    )}
+                  </a>
+                );
+              })
+            }
+          </nav>
+
+          <button
+            type="button"
+            class="theme-toggle"
+            id="rel-theme-toggle"
+            aria-label="Switch color theme"
+            title="Switch between light workbench and dark telemetry bench"
+          >
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke-linecap="round" />
+            </svg>
+            <span class="theme-toggle-label" id="rel-theme-label">Bench</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell-inner footer-grid">
+        <div>
+          <a class="brand" href="/">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 36 36" fill="none">
+                <defs>
+                  <linearGradient id="ftr-c2-seam" x1="8" y1="5" x2="18" y2="30" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#4CC38A" />
+                    <stop offset="50%" stop-color="#E6A23C" />
+                    <stop offset="100%" stop-color="#4CC38A" />
+                  </linearGradient>
+                </defs>
+                <path d="M17.5 3.8L23 6.8L11.5 13.5L5.8 10.3L17.5 3.8Z" fill="#2A3831" stroke="#4D6157" stroke-width="1" stroke-linejoin="round" />
+                <path d="M5.8 10.3L11.5 13.5V27.4L5.8 24.1V10.3Z" fill="#1A231F" stroke="#394941" stroke-width="1" stroke-linejoin="round" />
+                <path d="M24.4 7.6L12.9 14.3V28.2" stroke="url(#ftr-c2-seam)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M26 8.5L30.6 11.2L19.1 17.9L14.5 15.2L26 8.5Z" fill="#314139" stroke="#5B7266" stroke-width="1" stroke-linejoin="round" />
+                <path d="M14.5 15.2L19.1 17.9V31.8L14.5 29.1V15.2Z" fill="#18211D" stroke="#41534A" stroke-width="1" stroke-linejoin="round" />
+                <path d="M19.1 17.9L30.6 11.2V25.1L19.1 31.8V17.9Z" fill="#0B100E" stroke="#5B7266" stroke-width="1.1" stroke-linejoin="round" />
+                <path d="M21.4 22.6L24.1 21V22.9L21.4 24.5V22.6Z" fill="#4CC38A" />
+                <path d="M25.4 20.3L28.1 18.7V20.6L25.4 22.2V20.3Z" fill="#4CC38A" />
+              </svg>
+            </span>
+            <span class="brand-name">Reverse <span>Engineer Lab</span></span>
+          </a>
+          <p class="footer-tagline">Know how it works. Know what you don't.</p>
+          <p class="footer-sub">
+            An open empirical register of software architectures, protocol contracts, and explicit
+            methodological boundaries.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-heading">Catalog Index</div>
+          <ul class="footer-links">
+            <li><a href="/">Catalog (All distillations)</a></li>
+            <li><a href="/about">About &amp; methodology</a></li>
+            <li><a href="/submit">Submit research</a></li>
+            <li><a href="/sitemap.xml">Sitemap (XML)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-provenance">
+          <div class="footer-heading">Provenance</div>
+          <p>An independent research catalog.</p>
+          <p>Not affiliated with the Reverse Engineer Anything project.</p>
+          <a class="footer-admin-link" href="/_emdash/admin/plugins/rea-catalog/review">
+            <span>Editor sign in</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script is:inline src="/fx/viewport-pool.js" defer></script>
+    <script is:inline src="/fx/dither.js" defer></script>
+    <script is:inline src="/fx/surface-micro.js" defer></script>
+    <script>
+      function initRelChromeAndFx(): void {
+        const root = document.documentElement;
+        const btn = document.getElementById("rel-theme-toggle");
+        const lbl = document.getElementById("rel-theme-label");
+        const meta = document.getElementById("rel-theme-color");
+
+        const resolveDark = (mode: string): boolean =>
+          mode === "dark" ||
+          (mode === "system" &&
+            typeof window.matchMedia === "function" &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+        const applyTheme = (mode: string, persist: boolean): void => {
+          const dark = resolveDark(mode);
+          root.setAttribute("data-theme", mode);
+          root.setAttribute("data-resolved-theme", dark ? "dark" : "light");
+          if (lbl) lbl.textContent = dark ? "Dark" : "Light";
+          if (meta) meta.setAttribute("content", dark ? "#111614" : "#e8ece9");
+          if (persist) {
+            try {
+              localStorage.setItem("rel-theme", mode);
+              document.cookie = `rel-theme=${mode}; path=/; max-age=31536000; SameSite=Lax`;
+            } catch {
+              /* ignore storage errors */
+            }
+          }
+          renderDitherSurfaces();
+        };
+
+        const renderDitherSurfaces = (): void => {
+          const win = window as unknown as {
+            ditherPatternSvg?: (opts: {
+              id?: string;
+              density?: number;
+              cellSize?: number;
+              fg?: string;
+              bayer?: number;
+            }) => string;
+          };
+          if (typeof win.ditherPatternSvg !== "function") return;
+          document.querySelectorAll<HTMLElement>("[data-dither-surface]").forEach((el, idx) => {
+            const density = Number(el.dataset.ditherDensity || "0.26");
+            el.innerHTML = win.ditherPatternSvg!({
+              id: `rel-bayer-${idx}`,
+              density,
+              cellSize: 3,
+              bayer: 8,
+              fg: "var(--color-accent)",
+            });
+          });
+        };
+
+        const initialMode = root.getAttribute("data-theme") || "system";
+        applyTheme(initialMode, false);
+
+        if (btn) {
+          btn.addEventListener("click", () => {
+            const currentlyDark = root.getAttribute("data-resolved-theme") === "dark";
+            applyTheme(currentlyDark ? "light" : "dark", true);
+          });
+        }
+
+        const winFx = window as unknown as {
+          mountHoverTilt?: (target: string, opts?: { maxDeg?: number }) => Element[];
+          mountNumberTicker?: (
+            target: Element,
+            opts?: {
+              decimals?: number;
+              prefix?: string;
+              suffix?: string;
+              value?: number;
+              duration?: number;
+            },
+          ) => { setValue: (v: number) => void } | null;
+        };
+
+        if (typeof winFx.mountHoverTilt === "function") {
+          winFx.mountHoverTilt(".research-card", { maxDeg: 4 });
+        }
+
+        const tickerEl = document.querySelector<HTMLElement>("[data-published-ticker]");
+        if (tickerEl && typeof winFx.mountNumberTicker === "function") {
+          const targetCount = Number(tickerEl.dataset.publishedCount || "0");
+          if (targetCount > 0) {
+            const ticker = winFx.mountNumberTicker(tickerEl, {
+              decimals: 0,
+              prefix: "",
+              suffix: " published",
+              value: Math.max(0, targetCount - 5),
+              duration: 520,
+            });
+            if (ticker) ticker.setValue(targetCount);
+          }
+        }
+
+        renderDitherSurfaces();
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initRelChromeAndFx);
+      } else {
+        initRelChromeAndFx();
+      }
+    </script>
+  </body>
+</html>

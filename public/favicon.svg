@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+  <rect width="36" height="36" rx="7" fill="#111614"/>
+  <defs>
+    <linearGradient id="f-seam" x1="8" y1="5" x2="18" y2="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4CC38A"/>
+      <stop offset="50%" stop-color="#E6A23C"/>
+      <stop offset="100%" stop-color="#4CC38A"/>
+    </linearGradient>
+  </defs>
+  <path d="M17.5 4.5L22.8 7.4L11.6 13.9L6.2 10.9L17.5 4.5Z" fill="#2A3831" stroke="#4D6157" stroke-width="1" stroke-linejoin="round"/>
+  <path d="M6.2 10.9L11.6 13.9V27.1L6.2 24V10.9Z" fill="#1B2420" stroke="#394941" stroke-width="1" stroke-linejoin="round"/>
+  <path d="M24.2 8.2L13 14.7V27.9" stroke="url(#f-seam)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M25.8 9.1L30.2 11.6L19 18.1L14.6 15.6L25.8 9.1Z" fill="#314139" stroke="#5B7266" stroke-width="1" stroke-linejoin="round"/>
+  <path d="M14.6 15.6L19 18.1V31.3L14.6 28.8V15.6Z" fill="#18211D" stroke="#41534A" stroke-width="1" stroke-linejoin="round"/>
+  <path d="M19 18.1L30.2 11.6V24.8L19 31.3V18.1Z" fill="#0B100E" stroke="#5B7266" stroke-width="1.1" stroke-linejoin="round"/>
+  <path d="M21.2 22.6L23.9 21V22.9L21.2 24.5V22.6Z" fill="#4CC38A"/>
+  <path d="M25.2 20.3L27.9 18.7V20.6L25.2 22.2V20.3Z" fill="#4CC38A"/>
+</svg>

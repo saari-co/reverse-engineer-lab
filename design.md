@@ -19,7 +19,7 @@ Reverse Engineer Lab (`https://reverseengineerlab.com`) is an independent, publi
 - **Submission contract (`src/pages/submit.astro` + `src/lib/validation.ts`)**:
   - Preserve `#submission`, `#form-result` (`role="status" aria-live="polite"`), honeypot `name="website"`, consent checkbox `name="consent"`, and POST `/_emdash/api/plugins/rea-catalog/submit` JSON envelope handling. Text and public HTTPS links only; zero file uploads.
 - **Anti-slop & honesty (`emdash-stitch-design`)**:
-  - Zero fabricated metrics, star counts, testimonials, or `LABEL // 2026` filler badges. Every displayed distillation count (`19 published`), target type, author, date, and evidence link comes strictly from EmDash content.
+  - Zero fabricated metrics, star counts, testimonials, or `LABEL // 2026` filler badges. Every displayed distillation count (`20 published`), target type, author, date, and evidence link comes strictly from EmDash content.
   - Zero emojis in UI chrome.
   - Zero horizontal overflow across `320px–767px` mobile and desktop viewports; every `[hidden]`-toggled element with a custom `display` rule carries a matching `[hidden] { display: none }`.
 
@@ -41,7 +41,7 @@ Reverse Engineer Lab (`https://reverseengineerlab.com`) is an independent, publi
 - **Minor Animation (`emdash-surface-fx`)**:
   - Token-aware Bayer `8×8` dither wash (`public/fx/dither.js`, pooled via `public/fx/viewport-pool.js`).
   - Gentle SVG signal trace pulse along the hero `SYSTEM -> EVIDENCE -> UNDERSTANDING` schematic diagram.
-  - Lightweight CSS-variable 3D hover tilt (`mountHoverTilt`) on catalog cards + `mountNumberTicker` (`tabular-nums`) on the published index count (`19 published`) (`public/fx/surface-micro.js`), all respecting `prefers-reduced-motion: reduce`.
+  - Lightweight CSS-variable 3D hover tilt (`mountHoverTilt`) on catalog cards + `mountNumberTicker` (`tabular-nums`) on the published index count (`20 published`) (`public/fx/surface-micro.js`), all respecting `prefers-reduced-motion: reduce`.
 
 ## WCAG 2.x AA Contrast Verification Matrix
 

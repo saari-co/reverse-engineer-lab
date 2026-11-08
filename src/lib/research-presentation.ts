@@ -92,6 +92,11 @@ export const researchPresentation: Record<string, { title: string; steps: string
   'grok-bot-sand-coordinator-and-vm-boundaries': {
     title: 'Grok Bot Sand coordinator and VM boundary',
     steps: ['Singleton coordinatorPort + ConnectRPC', 'Bots, Routines and Triggers', 'Firecracker VM + host-held OAuth'],
-    related: ['claude-code-projects-hearth-and-reply-gate', 'capy-desktop-kappu-sidecar-and-effect-httpapi']
+    related: ['claude-code-projects-hearth-and-reply-gate', 'capy-desktop-kappu-sidecar-and-effect-httpapi', 'signal-pqxdh-sealed-sender-and-linked-device-boundaries']
+  },
+  'signal-pqxdh-sealed-sender-and-linked-device-boundaries': {
+    title: 'Signal PQXDH, Sealed Sender v2 and linked devices',
+    steps: ['PQXDH + SPQR Triple Ratchet', 'Sealed Sender v2 + zkgroup', 'Primary vs linked-device sync'],
+    related: ['grok-bot-sand-coordinator-and-vm-boundaries', 'chatgpt-codex-quicksilver-webrtc-and-sonora-voice', 'antigravity-thinker-talker-voice-tunnel']
   }
 };

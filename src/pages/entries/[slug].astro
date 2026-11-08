@@ -1,14 +1,199 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getEmDashEntry } from 'emdash';
-import { evidenceLinks,canonicalOrigin } from '../../lib/catalog';
-import { metaDescription, authorEntity } from '../../lib/seo';
-import { researchPresentation } from '../../lib/research-presentation';
-import { fieldLabels } from '../../lib/validation';
-const {entry}=await getEmDashEntry('distillations',Astro.params.slug!);
-if(!entry||entry.data.status!=='published')return Astro.rewrite('/404');
-const d:any=entry.data;const links=evidenceLinks(d.links);const origin=canonicalOrigin();
-const presentation=researchPresentation[entry.id];
-const structured={'@context':'https://schema.org','@type':'Article',headline:d.title,description:d.summary,author:authorEntity(d.author),publisher:authorEntity('Reverse Engineer Lab'),image:{'@type':'ImageObject',url:origin+'/social-card.png',width:1200,height:630},dateCreated:d.investigated_at,datePublished:d.publishedAt,dateModified:d.updatedAt,mainEntityOfPage:origin+'/entries/'+entry.id,citation:links,about:{'@type':'Thing',name:d.target}};
+import Layout from "../../layouts/Layout.astro";
+import { getEmDashEntry } from "emdash";
+import { evidenceLinks, canonicalOrigin } from "../../lib/catalog";
+import { metaDescription, authorEntity } from "../../lib/seo";
+import { researchPresentation } from "../../lib/research-presentation";
+import { fieldLabels } from "../../lib/validation";
+
+const { entry } = await getEmDashEntry("distillations", Astro.params.slug!);
+if (!entry || entry.data.status !== "published") return Astro.rewrite("/404");
+
+const d = entry.data as Record<string, string | undefined>;
+const links = evidenceLinks(d.links);
+const origin = canonicalOrigin();
+const presentation = researchPresentation[entry.id];
+
+const structured = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: d.title ?? "",
+  description: d.summary ?? "",
+  author: authorEntity(d.author ?? "Reverse Engineer Lab"),
+  publisher: authorEntity("Reverse Engineer Lab"),
+  image: {
+    "@type": "ImageObject",
+    url: (origin ?? "https://reverseengineerlab.com") + "/social-card-c2.png",
+    width: 1200,
+    height: 630,
+  },
+  dateCreated: d.investigated_at,
+  datePublished: d.publishedAt,
+  dateModified: d.updatedAt,
+  mainEntityOfPage: origin ? origin + "/entries/" + entry.id : undefined,
+  citation: links,
+  about: { "@type": "Thing", name: d.target ?? "" },
+};
+
+const renderedSections = Object.entries(fieldLabels).filter(
+  ([key]) => key !== "summary" && Boolean(d[key]),
+);
 ---
-<Layout title={`${presentation?.title??d.title} | Reverse Engineer Lab`} description={metaDescription(d.summary)} structured={structured} article><article class="detail" data-content-source="emdash"><a class="back" href="/">← All distillations</a><div class="eyebrow">{d.kind} / {d.target}</div><h1>{d.title}</h1><p class="lede">{d.summary}</p><div class="metadata"><span><b>INVESTIGATED BY</b>{d.author}</span><span><b>DATE</b>{d.investigated_at}</span><span><b>VERSION / REVISION</b>{d.target_version}</span></div>{presentation&&<figure class="model-sketch"><figcaption>Contract model · conceptual sequence, not a claim about internal deployment</figcaption><ol>{presentation.steps.map(step=><li>{step}</li>)}</ol></figure>}<div class="article-layout"><div>{Object.entries(fieldLabels).filter(([key])=>key!=='summary'&&d[key]).map(([key,label])=><section class:list={['article-section',{'coverage':key==='unknown'}]} id={key}><h2>{label}</h2><p>{d[key]}</p></section>)}</div><aside class="sources"><div class="eyebrow">FOLLOW THE EVIDENCE</div><h2>Sources & analysis</h2><p>Links are supplied by the author. Review their scope and revision; a link alone does not establish a claim.</p><ol>{links.map(link=><li><a href={link} rel="ugc nofollow noopener noreferrer" target="_blank">{new URL(link).hostname}<span>{new URL(link).pathname} ↗</span></a></li>)}</ol></aside></div>{presentation&&<section class="related-research"><h2>Related investigations</h2><ul>{presentation.related.filter(slug=>researchPresentation[slug]).map(slug=><li><a href={'/entries/'+slug}>{researchPresentation[slug].title}</a></li>)}</ul></section>}</article></Layout>
+
+<Layout
+  title={`${presentation?.title ?? d.title} | Reverse Engineer Lab`}
+  description={metaDescription(d.summary ?? "")}
+  structured={structured}
+  article
+>
+  <article class="detail" data-content-source="emdash">
+    <div class="breadcrumb-bar">
+      <a class="back" href="/">← All distillations</a>
+      <span class="tag">
+        {d.kind} · {d.target}
+      </span>
+    </div>
+
+    <header class="dossier-hero">
+      <div class="corner-pin corner-pin-tl" aria-hidden="true"></div>
+      <div class="corner-pin corner-pin-br" aria-hidden="true"></div>
+
+      <div class="eyebrow">
+        <span class="pip" aria-hidden="true"></span>
+        <span>
+          {d.kind} / {d.target}
+        </span>
+      </div>
+
+      <h1>{d.title}</h1>
+      <p class="lede">{d.summary}</p>
+
+      <div class="metadata">
+        <div class="metadata-cell">
+          <b>INVESTIGATED BY</b>
+          {d.author}
+        </div>
+        <div class="metadata-cell">
+          <b>DATE</b>
+          {d.investigated_at}
+        </div>
+        <div class="metadata-cell">
+          <b>VERSION / REVISION</b>
+          {d.target_version}
+        </div>
+      </div>
+    </header>
+
+    {
+      presentation && (
+        <figure class="model-sketch">
+          <figcaption>
+            Contract model · conceptual sequence, not a claim about internal deployment
+          </figcaption>
+          <ol>
+            {presentation.steps.map((step) => (
+              <li>{step}</li>
+            ))}
+          </ol>
+        </figure>
+      )
+    }
+
+    <div class="article-layout">
+      <div class="article-stack">
+        {
+          renderedSections.map(([key, label], idx) => {
+            const isBoundary = key === "unknown";
+            return (
+              <section class:list={["article-section", { coverage: isBoundary }]} id={key}>
+                <div class="article-section-kicker">
+                  <span class:list={["pip", { "pip-amber": isBoundary }]} aria-hidden="true" />
+                  <span>
+                    {String(idx + 1).padStart(2, "0")} /{" "}
+                    {isBoundary ? "METHODOLOGICAL BOUNDARY" : "EMPIRICAL RECORD"}
+                  </span>
+                </div>
+                <h2>{label}</h2>
+                <p>{d[key]}</p>
+              </section>
+            );
+          })
+        }
+      </div>
+
+      <aside class="detail-sidebar">
+        <div class="sources">
+          <div class="eyebrow">
+            <span class="pip" aria-hidden="true"></span>
+            <span>FOLLOW THE EVIDENCE</span>
+          </div>
+          <h2>Sources &amp; analysis</h2>
+          <p>
+            Links are supplied by the author. Review their scope and revision; a link alone does not
+            establish a claim.
+          </p>
+          <ol>
+            {
+              links.map((link) => (
+                <li>
+                  <a href={link} rel="ugc nofollow noopener noreferrer" target="_blank">
+                    {new URL(link).hostname}
+                    <span>{new URL(link).pathname} ↗</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+
+        {
+          renderedSections.length > 1 && (
+            <nav class="jump-card" aria-label="Distillation sections">
+              <div class="eyebrow">
+                <span class="pip pip-amber" aria-hidden="true"></span>
+                <span>SECTION INDEX</span>
+              </div>
+              <h2>On this page</h2>
+              <ol class="jump-list">
+                {renderedSections.map(([key, label], idx) => (
+                  <li>
+                    <a href={`#${key}`} class:list={[{ "is-boundary": key === "unknown" }]}>
+                      <span>
+                        {String(idx + 1).padStart(2, "0")}. {label}
+                      </span>
+                      <span aria-hidden="true">↓</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )
+        }
+      </aside>
+    </div>
+
+    {
+      presentation && (
+        <section class="related-research">
+          <div class="eyebrow">
+            <span class="pip" aria-hidden="true"></span>
+            <span>CROSS-REFERENCE</span>
+          </div>
+          <h2>Related investigations</h2>
+          <ul class="related-grid">
+            {presentation.related
+              .filter((slug) => researchPresentation[slug])
+              .map((slug) => (
+                <li>
+                  <a href={"/entries/" + slug}>
+                    <span>{researchPresentation[slug].title}</span>
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              ))}
+          </ul>
+        </section>
+      )
+    }
+  </article>
+</Layout>

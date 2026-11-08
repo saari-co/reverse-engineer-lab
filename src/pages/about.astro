@@ -1,4 +1,155 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
-<Layout title="About the research catalog | Reverse Engineer Lab"><article class="detail narrow"><div class="eyebrow">ABOUT THE INDEX</div><h1>Understanding,<br/><em>with receipts.</em></h1><p class="lede">Reverse Engineer Lab is an independent catalog of reverse engineering research and case studies. It is not affiliated with Reverse Engineer Anything.</p><section class="article-section"><h2>Research takes different shapes</h2><p>A binary analysis, API investigation, or architecture teardown will not produce the same report. The shared foundation is a clear question, a target and revision, findings, public evidence, and honest limitations.</p></section><section class="article-section"><h2>Separate observation from inference</h2><p>Observed facts come from inspected artifacts or measured behavior. Inferences explain what those facts might mean. Unknowns describe where the evidence ends. Publication means an editor reviewed the submission, not that every conclusion is independently reproduced.</p></section><section class="article-section"><h2>Contribute safely</h2><p>Share original text and public HTTPS links. Prefer evidence pinned to a revision. Do not submit credentials, private links, personal data, or proprietary source. We do not fetch or execute submitted URLs. Editors can approve a submission or deny it with a recorded reason.</p><a class="text-link" href="/submit">Submit an investigation ↗</a></section></article></Layout>
+
+<Layout title="About the research catalog | Reverse Engineer Lab">
+  <section class="about-hero">
+    <div>
+      <div class="eyebrow">
+        <span class="pip" aria-hidden="true"></span>
+        <span>ABOUT THE INDEX</span>
+      </div>
+      <h1>
+        Understanding,<br />
+        <em>with receipts.</em>
+      </h1>
+      <p class="lede">
+        Reverse Engineer Lab is an independent catalog of reverse engineering research and case
+        studies. It is not affiliated with Reverse Engineer Anything.
+      </p>
+    </div>
+
+    <div class="specimen-plate-wrap">
+      <div class="corner-pin corner-pin-tl" aria-hidden="true"></div>
+      <div class="corner-pin corner-pin-br" aria-hidden="true"></div>
+      <aside class="diagram" aria-label="Empirical disassembly sequence">
+        <div class="diagram-top">
+          <strong>EMPIRICAL SEQUENCE</strong>
+          <span>METHODOLOGY</span>
+        </div>
+        <div class="specimen-ruler" aria-hidden="true"></div>
+        <div class="diagram-node">
+          <div class="diagram-node-head">
+            <span>SYSTEM</span>
+            <span class="diagram-node-tag">TARGET</span>
+          </div>
+          <span class="diagram-node-sub">question, version, and revision scope</span>
+        </div>
+        <div class="trace-connector" aria-hidden="true">
+          <svg viewBox="0 0 24 26" fill="none">
+            <line class="trace-line-base" x1="12" y1="1" x2="12" y2="21" />
+            <line class="trace-line-pulse" x1="12" y1="1" x2="12" y2="21" />
+            <path class="trace-arrow" d="M8.5 18.5L12 24L15.5 18.5H8.5Z" />
+          </svg>
+        </div>
+        <div class="diagram-node is-evidence">
+          <div class="diagram-node-head">
+            <span>EVIDENCE</span>
+            <span class="diagram-node-tag">OBSERVED</span>
+          </div>
+          <span class="diagram-node-sub">public links, artifacts, and measured behavior</span>
+        </div>
+        <div class="trace-connector" aria-hidden="true">
+          <svg viewBox="0 0 24 26" fill="none">
+            <line class="trace-line-base" x1="12" y1="1" x2="12" y2="21" />
+            <line class="trace-line-pulse" x1="12" y1="1" x2="12" y2="21" />
+            <path class="trace-arrow" d="M8.5 18.5L12 24L15.5 18.5H8.5Z" />
+          </svg>
+        </div>
+        <div class="diagram-node is-understanding">
+          <div class="diagram-node-head">
+            <span>UNDERSTANDING</span>
+            <span class="diagram-node-tag">BOUNDED</span>
+          </div>
+          <span class="diagram-node-sub">inferences separated from explicit unknowns</span>
+        </div>
+        <div class="diagram-bottom">
+          <span>No black boxes. No borrowed certainty.</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="taxonomy-strip" aria-label="Claim taxonomy">
+    <div class="taxonomy-card">
+      <div class="eyebrow">
+        <span class="pip" aria-hidden="true"></span>
+        <span>01 / OBSERVED</span>
+      </div>
+      <h3>Inspected facts</h3>
+      <p>
+        Direct observations from public artifacts, protocol schemas, or measured behavior at a named
+        version.
+      </p>
+    </div>
+
+    <div class="taxonomy-card">
+      <div class="eyebrow">
+        <span class="pip" aria-hidden="true"></span>
+        <span>02 / INFERRED</span>
+      </div>
+      <h3>Architectural reasoning</h3>
+      <p>
+        Explanations of what observed facts likely mean when internal server state is not directly
+        witnessed.
+      </p>
+    </div>
+
+    <div class="taxonomy-card is-amber">
+      <div class="eyebrow">
+        <span class="pip pip-amber" aria-hidden="true"></span>
+        <span>03 / UNKNOWN</span>
+      </div>
+      <h3>Where evidence ends</h3>
+      <p>
+        Explicit boundaries showing what was not tested, attached, or verified during the
+        investigation.
+      </p>
+    </div>
+  </section>
+
+  <div class="pillars-stack">
+    <section class="pillar-card">
+      <div>
+        <div class="eyebrow">01 / SCOPE</div>
+        <h2>Research takes different shapes</h2>
+      </div>
+      <p>
+        A binary analysis, API investigation, or architecture teardown will not produce the same
+        report. The shared foundation is a clear question, a target and revision, findings, public
+        evidence, and honest limitations.
+      </p>
+    </section>
+
+    <section class="pillar-card">
+      <div>
+        <div class="eyebrow">02 / DISCIPLINE</div>
+        <h2>Separate observation from inference</h2>
+      </div>
+      <p>
+        Observed facts come from inspected artifacts or measured behavior. Inferences explain what
+        those facts might mean. Unknowns describe where the evidence ends. Publication means an
+        editor reviewed the submission, not that every conclusion is independently reproduced.
+      </p>
+    </section>
+
+    <section class="pillar-card">
+      <div>
+        <div class="eyebrow">03 / SAFETY</div>
+        <h2>Contribute safely</h2>
+      </div>
+      <div>
+        <p style="margin-bottom: 20px;">
+          Share original text and public HTTPS links. Prefer evidence pinned to a revision. Do not
+          submit credentials, private links, personal data, or proprietary source. We do not fetch
+          or execute submitted URLs. Editors can approve a submission or deny it with a recorded
+          reason.
+        </p>
+        <a class="btn-primary" href="/submit">
+          <span>Submit an investigation</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>

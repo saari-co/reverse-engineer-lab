@@ -1,15 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-<rect width="1200" height="630" fill="#f3f0e8"/>
-<path d="M64 112H1136M64 551H1136" stroke="#bfc6b7"/>
-<rect x="64" y="49" width="55" height="37" fill="#242a23"/><text x="74" y="75" fill="#f3f0e8" font-family="monospace" font-size="25">r/e</text>
-<text x="138" y="77" fill="#242a23" font-family="Arial,sans-serif" font-size="27" font-weight="700">REVERSE ENGINEER LAB</text>
-<text x="64" y="216" fill="#242a23" font-family="Georgia,serif" font-size="66">How software works.</text>
-<text x="64" y="295" fill="#355940" font-family="Georgia,serif" font-style="italic" font-size="66">Evidence included.</text>
-<g font-family="Arial,sans-serif" text-anchor="middle" font-size="22">
-<rect x="64" y="373" width="303" height="107" fill="#f3f0e8" stroke="#929e87"/><text x="215" y="416" fill="#242a23">SYSTEM</text><text x="215" y="451" fill="#62665e" font-size="17">The question we investigate</text>
-<text x="396" y="436" fill="#355940" font-size="31">→</text>
-<rect x="430" y="373" width="303" height="107" fill="#d8e9bd" stroke="#929e87"/><text x="581" y="416" fill="#242a23">EVIDENCE</text><text x="581" y="451" fill="#62665e" font-size="17">Sources, examples, limitations</text>
-<text x="762" y="436" fill="#355940" font-size="31">→</text>
-<rect x="796" y="373" width="340" height="107" fill="#242a23"/><text x="966" y="416" fill="#f3f0e8">UNDERSTANDING</text><text x="966" y="451" fill="#d8e9bd" font-size="17">With the unknowns left visible</text>
-</g><text x="64" y="591" fill="#62665e" font-family="Arial,sans-serif" font-size="23">Software reverse engineering research</text><text x="1136" y="591" text-anchor="end" fill="#355940" font-family="monospace" font-size="21">reverseengineerlab.com</text>
+  <defs>
+    <linearGradient id="c2-seam" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4CC38A"/>
+      <stop offset="50%" stop-color="#E6A23C"/>
+      <stop offset="100%" stop-color="#4CC38A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#111614"/>
+  <rect x="32" y="32" width="1136" height="566" rx="4" fill="#171F1B" stroke="#394941" stroke-width="1.5"/>
+  <path d="M64 116H1136M64 536H1136" stroke="#2D3B34" stroke-width="1.5"/>
+  <g transform="translate(64,52) scale(1.25)">
+    <path d="M12.5 14L22.5 8.2L22.5 24.5L12.5 30.2Z" fill="url(#c2-seam)" opacity="0.9"/>
+    <path d="M17.5 3.8L23 6.8L11.5 13.5L5.8 10.3L17.5 3.8Z" fill="#2A3831" stroke="#4D6157" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M5.8 10.3L11.5 13.5V27.4L5.8 24.1V10.3Z" fill="#1A231F" stroke="#394941" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M26 8.5L30.6 11.2L19.1 17.9L14.5 15.2L26 8.5Z" fill="#314139" stroke="#5B7266" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M14.5 15.2L19.1 17.9V31.8L14.5 29.1V15.2Z" fill="#18211D" stroke="#41534A" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M19.1 17.9L30.6 11.2V25.1L19.1 31.8V17.9Z" fill="#0B100E" stroke="#5B7266" stroke-width="1.1" stroke-linejoin="round"/>
+    <path d="M21.4 22.6L24.1 21V22.9L21.4 24.5V22.6Z" fill="#4CC38A"/>
+    <path d="M25.4 20.3L28.1 18.7V20.6L25.4 22.2V20.3Z" fill="#4CC38A"/>
+  </g>
+  <text x="122" y="83" fill="#ECEAE2" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="24" font-weight="700" letter-spacing="1.5">REVERSE ENGINEER LAB</text>
+  <text x="64" y="214" fill="#ECEAE2" font-family="Georgia,serif" font-size="64">Software reverse engineering</text>
+  <text x="64" y="290" fill="#4CC38A" font-family="Georgia,serif" font-style="italic" font-size="64">research, with evidence.</text>
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" text-anchor="middle" font-size="20">
+    <rect x="64" y="366" width="310" height="112" rx="3" fill="#111614" stroke="#4D6157" stroke-width="1.5"/>
+    <text x="219" y="412" fill="#ECEAE2" font-weight="700">SYSTEM</text>
+    <text x="219" y="446" fill="#A6B3AC" font-size="15">The target we investigate</text>
+    <text x="404" y="430" fill="#E6A23C" font-size="28">→</text>
+    <rect x="434" y="366" width="310" height="112" rx="3" fill="#1E2823" stroke="#4CC38A" stroke-width="1.5"/>
+    <text x="589" y="412" fill="#4CC38A" font-weight="700">EVIDENCE</text>
+    <text x="589" y="446" fill="#ECEAE2" font-size="15">Observations, traces, sources</text>
+    <text x="774" y="430" fill="#E6A23C" font-size="28">→</text>
+    <rect x="804" y="366" width="332" height="112" rx="3" fill="#111614" stroke="#E6A23C" stroke-width="1.5"/>
+    <text x="970" y="412" fill="#E6A23C" font-weight="700">UNDERSTANDING</text>
+    <text x="970" y="446" fill="#A6B3AC" font-size="15">With unknowns left visible</text>
+  </g>
+  <text x="64" y="574" fill="#A6B3AC" font-family="system-ui,-apple-system,sans-serif" font-size="21">No black boxes. Observations, inferences, and limitations separated.</text>
+  <text x="1136" y="574" text-anchor="end" fill="#4CC38A" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="20">reverseengineerlab.com</text>
 </svg>

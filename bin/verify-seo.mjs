@@ -34,7 +34,7 @@ for(const path of ['/submit','/?q=Katana']){
  const r=await fetch(origin+path);const html=await r.text();assert(html.includes('noindex, follow'));
  assert.equal(r.headers.get('x-robots-tag'),'noindex, follow');
 }
-const image=await fetch(origin+'/social-card.png');assert.equal(image.status,200);assert(image.headers.get('content-type')?.includes('image/png'));await image.body?.cancel();report.image=true;
+for(const cardPath of ['/social-card-c2.png','/social-card.png']){const image=await fetch(origin+cardPath);assert.equal(image.status,200);assert(image.headers.get('content-type')?.includes('image/png'));await image.body?.cancel();}report.image=true;
 const missing=await fetch(origin+'/not-a-real-rel-page');assert.equal(missing.status,404);await missing.body?.cancel();
 const admin=await fetch(origin+'/_emdash/admin',{redirect:'manual'});assert.equal(admin.status,302);assert(new URL(admin.headers.get('location')).hostname.endsWith('.cloudflareaccess.com'));await admin.body?.cancel();report.adminProtected=true;
 console.log(JSON.stringify(report,null,2));

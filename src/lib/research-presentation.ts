@@ -52,7 +52,7 @@ export const researchPresentation: Record<string, { title: string; steps: string
   'shopify-fall26-shop-mcp-and-wasi-cli': {
     title: 'Shopify Fall ’26 Shop MCP and WASI CLI',
     steps: ['Discovery + Skills-over-MCP', 'Shop cart / checkout or SpendRequest', 'Confirmed payment or virtual card'],
-    related: ['shopify-aquifer-river-agent-platform', 'shopify-graphql-cost-and-cursors', 'woocommerce-store-api-and-order-storage']
+    related: ['shopify-aquifer-river-agent-platform', 'shopify-graphql-cost-and-cursors', 'woocommerce-store-api-and-order-storage', 'yotpo-multi-plane-admin-email-gate-and-mcp']
   },
   'xero-hybrid-mfe-and-reconciliation-boundaries': {
     title: 'Xero MFE shell and reconciliation boundary',
@@ -62,7 +62,7 @@ export const researchPresentation: Record<string, { title: string; steps: string
   'schwab-treasury-and-brokerage-contract-boundaries': {
     title: 'Schwab Trader API and Treasury boundary',
     steps: ['Public auction + fixed-income rules', 'Approved Trader API OAuth scope', 'Human-authorized brokerage execution'],
-    related: ['xero-hybrid-mfe-and-reconciliation-boundaries', 'digits-source-ledger-boundary']
+    related: ['coinbase-advanced-trade-oauth-sandbox-and-scope-boundaries', 'xero-hybrid-mfe-and-reconciliation-boundaries', 'digits-source-ledger-boundary']
   },
   'claude-code-projects-hearth-and-reply-gate': {
     title: 'Claude Code Projects and Hearth runtime',
@@ -103,5 +103,25 @@ export const researchPresentation: Record<string, { title: string; steps: string
     title: 'Discord bootstrap ASAR, Gateway v10 and DAVE MLS',
     steps: ['Bootstrap ASAR + Rust discore', 'Gateway v10 + Components v2', 'DAVE MLS E2EE + Activities SDK'],
     related: ['signal-pqxdh-sealed-sender-and-linked-device-boundaries', 'chatgpt-codex-quicksilver-webrtc-and-sonora-voice', 'grok-bot-sand-coordinator-and-vm-boundaries']
+  },
+  'judgeme-metafield-ssr-and-open-web-publish': {
+    title: 'Judge.me metafield SSR and open-web publish',
+    steps: ['App Bridge + S3 presigned media', 'Dual-namespace metafield cache', 'SSR AI HTML + Postmark verify'],
+    related: ['loox-shadow-dom-slots-and-photo-incentives', 'yotpo-multi-plane-admin-email-gate-and-mcp', 'shopify-graphql-cost-and-cursors']
+  },
+  'loox-shadow-dom-slots-and-photo-incentives': {
+    title: 'Loox Shadow DOM slots and photo incentives',
+    steps: ['5-step photo-first ugc-form', 'Single-use PriceRule + review_feed', 'Shadow DOM zero-XHR slot hydrate'],
+    related: ['judgeme-metafield-ssr-and-open-web-publish', 'yotpo-multi-plane-admin-email-gate-and-mcp', 'shopify-fall26-shop-mcp-and-wasi-cli']
+  },
+  'yotpo-multi-plane-admin-email-gate-and-mcp': {
+    title: 'Yotpo multi-plane admin, email gate and MCP',
+    steps: ['3-plane admin + zero metafields', 'Email quarantine -> NLP publish', '3 Streamable HTTP MCP servers'],
+    related: ['judgeme-metafield-ssr-and-open-web-publish', 'loox-shadow-dom-slots-and-photo-incentives', 'shopify-fall26-shop-mcp-and-wasi-cli']
+  },
+  'coinbase-advanced-trade-oauth-sandbox-and-scope-boundaries': {
+    title: 'Coinbase Advanced Trade, OAuth MCP and sandbox',
+    steps: ['ES256 view-only / OAuth MCP', 'Preview + cursor/decimal quirks', 'Spot vs derivatives/wallet fence'],
+    related: ['schwab-treasury-and-brokerage-contract-boundaries', 'xero-hybrid-mfe-and-reconciliation-boundaries', 'digits-source-ledger-boundary']
   }
 };

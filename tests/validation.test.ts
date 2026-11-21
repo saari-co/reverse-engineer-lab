@@ -15,7 +15,7 @@ test('every seed distillation validates and aligns 1:1 with researchPresentation
   const seedRaw=fs.readFileSync(new URL('../seed/seed.json',import.meta.url),'utf8');
   const seed=JSON.parse(seedRaw);
   const items=seed.content.distillations as Array<{slug:string;status:string;data:Record<string,unknown>}>;
-  assert.equal(items.length,25);
+  assert.equal(items.length,26);
   const slugs=new Set(items.map(i=>i.slug));
   assert.deepEqual([...slugs].sort(),Object.keys(researchPresentation).sort());
   for(const item of items){
@@ -34,6 +34,19 @@ test('every seed distillation validates and aligns 1:1 with researchPresentation
     for(const rel of pres.related){
       assert.notEqual(rel,item.slug,item.slug);
       assert(slugs.has(rel),`${item.slug} -> missing ${rel}`);
+    }
+    if(pres.repo){
+      assert.equal(publicLink(pres.repo.url),true,`${item.slug} repo.url`);
+    }
+    if(pres.banner){
+      assert.equal(fs.existsSync(new URL('../public'+pres.banner.light,import.meta.url)),true,`${item.slug} banner.light`);
+      assert.equal(fs.existsSync(new URL('../public'+pres.banner.dark,import.meta.url)),true,`${item.slug} banner.dark`);
+    }
+    if(pres.diagram){
+      assert.equal(fs.existsSync(new URL('../public'+pres.diagram.src,import.meta.url)),true,`${item.slug} diagram.src`);
+    }
+    if(pres.avatar){
+      assert.equal(fs.existsSync(new URL('../public'+pres.avatar.src,import.meta.url)),true,`${item.slug} avatar.src`);
     }
   }
   for(const forbidden of [/\/Users\//,/\/home\/[a-z0-9_-]+\//i,/\bev_[0-9a-f]{16,}/i,/\bjrr_[0-9a-f]{16,}/i,/\brol_[0-9a-f]{16,}/i,/\b(sk-[A-Za-z0-9]{16,}|ghp_[A-Za-z0-9]{16,}|GOCSPX-[A-Za-z0-9_-]+)/]){

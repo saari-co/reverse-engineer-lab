@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { publishedEntries, canonicalOrigin } from "../lib/catalog";
+import { researchPresentation } from "../lib/research-presentation";
 
 const all = await publishedEntries();
 const q = (Astro.url.searchParams.get("q") || "").slice(0, 200);
@@ -195,24 +196,45 @@ const targetTypes = [
 
     <div class="research-grid">
       {
-        entries.map((e, i) => (
-          <a class="research-card" href={"/entries/" + e.id} data-content-source="emdash">
-            <span class:list={["card-pip", { "is-amber": i % 2 === 0 }]} aria-hidden="true" />
-            <div>
-              <div class="card-top">
-                <span class="tag">{e.data.kind}</span>
-                <span class="card-number">{String(i + 1).padStart(2, "0")} ↗</span>
+        entries.map((e, i) => {
+          const pres = researchPresentation[e.id];
+          return (
+            <a class="research-card" href={"/entries/" + e.id} data-content-source="emdash">
+              <span class:list={["card-pip", { "is-amber": i % 2 === 0 }]} aria-hidden="true" />
+              <div>
+                <div class="card-top">
+                  <span class="tag">{e.data.kind}</span>
+                  <span class="card-number">{String(i + 1).padStart(2, "0")} ↗</span>
+                </div>
+                {pres?.avatar ? (
+                  <div class="card-target-row">
+                    <img
+                      class="card-avatar"
+                      src={pres.avatar.src}
+                      alt={pres.avatar.alt}
+                      width="24"
+                      height="24"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div class="target">{e.data.target}</div>
+                  </div>
+                ) : (
+                  <div class="target">{e.data.target}</div>
+                )}
+                <h3>{e.data.title}</h3>
+                <p>{e.data.summary}</p>
               </div>
-              <div class="target">{e.data.target}</div>
-              <h3>{e.data.title}</h3>
-              <p>{e.data.summary}</p>
-            </div>
-            <div class="card-footer">
-              <span>{e.data.author}</span>
-              <span>{e.data.investigated_at}</span>
-            </div>
-          </a>
-        ))
+              <div class="card-footer">
+                <span>{e.data.author}</span>
+                <span class="card-footer-meta">
+                  {pres?.repo && <span class="card-repo-tag">GitHub</span>}
+                  <span>{e.data.investigated_at}</span>
+                </span>
+              </div>
+            </a>
+          );
+        })
       }
     </div>
 

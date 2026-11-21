@@ -1,4 +1,30 @@
-export const researchPresentation: Record<string, { title: string; steps: string[]; related: string[] }> = {
+export interface ResearchPresentationEntry {
+  title: string;
+  steps: string[];
+  related: string[];
+  repo?: {
+    url: string;
+    label: string;
+    description: string;
+  };
+  banner?: {
+    light: string;
+    dark: string;
+    alt: string;
+    caption: string;
+  };
+  diagram?: {
+    src: string;
+    alt: string;
+    caption: string;
+  };
+  avatar?: {
+    src: string;
+    alt: string;
+  };
+}
+
+export const researchPresentation: Record<string, ResearchPresentationEntry> = {
   'digits-source-ledger-boundary': {
     title: 'Digits source-to-ledger model',
     steps: ['Source identity', 'Processing and matching', 'Ledger result'],
@@ -127,6 +153,26 @@ export const researchPresentation: Record<string, { title: string; steps: string
   'freetpu-pixel-tensor-g5-baremetal-runtime': {
     title: 'FreeTPU: Pixel Tensor G5 bare-metal runtime & llama.cpp',
     steps: ['DGC0 + VLIW ISA compile-diff recovery', 'Litebuf VII + libopenbuenos zero-.so runtime', 'Dynamic param_slice LLM + W8A16 (BF16) GEMM'],
-    related: ['antigravity-thinker-talker-voice-tunnel', 'claude-code-projects-hearth-and-reply-gate', 'signal-pqxdh-sealed-sender-and-linked-device-boundaries']
+    related: ['antigravity-thinker-talker-voice-tunnel', 'claude-code-projects-hearth-and-reply-gate', 'signal-pqxdh-sealed-sender-and-linked-device-boundaries'],
+    repo: {
+      url: 'https://github.com/saariuslystoned/freetpu',
+      label: 'saariuslystoned/freetpu',
+      description: 'Apache-2.0 clean-room C++17 runtime (libopenbuenos), closed-form VLIW ISA specs, and llama.cpp EDGETPU backend.'
+    },
+    banner: {
+      light: '/media/freetpu/banner-light.jpg',
+      dark: '/media/freetpu/banner-dark.jpg',
+      alt: 'FreeTPU mascot and Pixel Tensor G5 4x4 SNAKE_16 open silicon banner',
+      caption: 'FreeTPU open-source runtime & VLIW ISA — Apache-2.0 companion repository on GitHub'
+    },
+    diagram: {
+      src: '/media/freetpu/architecture-diagram.svg',
+      alt: 'FreeTPU zero-vendor-.so execution pipeline from ggml-edgetpu through libopenbuenos and Litebuf VII to /dev/edgetpu-soc and the 4x4 serpentine PE mesh',
+      caption: 'Execution pipeline · ggml-edgetpu -> libopenbuenos -> Litebuf VII -> /dev/edgetpu-soc -> 4x4 PE Mesh'
+    },
+    avatar: {
+      src: '/media/freetpu/avatar-512x512.png',
+      alt: 'FreeTPU mascot'
+    }
   }
 };

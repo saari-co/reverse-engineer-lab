@@ -35,6 +35,19 @@ test('every seed distillation validates and aligns 1:1 with researchPresentation
       assert.notEqual(rel,item.slug,item.slug);
       assert(slugs.has(rel),`${item.slug} -> missing ${rel}`);
     }
+    if(pres.repo){
+      assert.equal(publicLink(pres.repo.url),true,`${item.slug} repo.url`);
+    }
+    if(pres.banner){
+      assert.equal(fs.existsSync(new URL('../public'+pres.banner.light,import.meta.url)),true,`${item.slug} banner.light`);
+      assert.equal(fs.existsSync(new URL('../public'+pres.banner.dark,import.meta.url)),true,`${item.slug} banner.dark`);
+    }
+    if(pres.diagram){
+      assert.equal(fs.existsSync(new URL('../public'+pres.diagram.src,import.meta.url)),true,`${item.slug} diagram.src`);
+    }
+    if(pres.avatar){
+      assert.equal(fs.existsSync(new URL('../public'+pres.avatar.src,import.meta.url)),true,`${item.slug} avatar.src`);
+    }
   }
   for(const forbidden of [/\/Users\//,/\/home\/[a-z0-9_-]+\//i,/\bev_[0-9a-f]{16,}/i,/\bjrr_[0-9a-f]{16,}/i,/\brol_[0-9a-f]{16,}/i,/\b(sk-[A-Za-z0-9]{16,}|ghp_[A-Za-z0-9]{16,}|GOCSPX-[A-Za-z0-9_-]+)/]){
     assert.equal(forbidden.test(seedRaw),false,`Forbidden pattern ${forbidden} in seed.json`);

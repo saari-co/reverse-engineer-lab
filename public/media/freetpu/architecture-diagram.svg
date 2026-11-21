@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 230" width="980" height="230" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#3ECF8E"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="978" height="228" rx="14" fill="#11151B" stroke="#2D3748" stroke-width="1.5"/>
+  <text x="24" y="30" fill="#D8A34A" font-size="11" font-weight="700" letter-spacing="1.8">FREETPU ZERO-VENDOR-.SO EXECUTION PIPELINE (TENSOR G5 // BUENOS_A0)</text>
+
+  <rect x="24" y="54" width="166" height="138" rx="10" fill="#171E29" stroke="#38BDF8" stroke-width="1.5"/>
+  <text x="107" y="80" text-anchor="middle" fill="#38BDF8" font-size="13" font-weight="700">ggml-edgetpu</text>
+  <text x="107" y="102" text-anchor="middle" fill="#E2E8F0" font-size="11">llama.cpp ACCEL</text>
+  <text x="107" y="122" text-anchor="middle" fill="#94A3B8" font-size="10">MUL_MAT (Q8_0/F32)</text>
+  <text x="107" y="140" text-anchor="middle" fill="#94A3B8" font-size="10">64B Host Buffer</text>
+  <text x="107" y="158" text-anchor="middle" fill="#94A3B8" font-size="10">CPU Glue Fallback</text>
+  <text x="107" y="178" text-anchor="middle" fill="#64748B" font-size="9.5">Zero Google .so</text>
+
+  <line x1="190" y1="123" x2="216" y2="123" stroke="#3ECF8E" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="220" y="54" width="176" height="138" rx="10" fill="#171E29" stroke="#3ECF8E" stroke-width="1.5"/>
+  <text x="308" y="80" text-anchor="middle" fill="#3ECF8E" font-size="13" font-weight="700">libopenbuenos</text>
+  <text x="308" y="102" text-anchor="middle" fill="#E2E8F0" font-size="11">C++17 Open Runtime</text>
+  <text x="308" y="122" text-anchor="middle" fill="#94A3B8" font-size="10">Tiled GEMM Emitter</text>
+  <text x="308" y="140" text-anchor="middle" fill="#94A3B8" font-size="10">Probe-A Weight Swap</text>
+  <text x="308" y="158" text-anchor="middle" fill="#94A3B8" font-size="10">LRU Graph &amp; Slab Pool</text>
+  <text x="308" y="178" text-anchor="middle" fill="#64748B" font-size="9.5">C11/C++17 ABI 0.1.0</text>
+
+  <line x1="396" y1="123" x2="422" y2="123" stroke="#3ECF8E" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="426" y="54" width="166" height="138" rx="10" fill="#171E29" stroke="#F0B44C" stroke-width="1.5"/>
+  <text x="509" y="80" text-anchor="middle" fill="#F0B44C" font-size="13" font-weight="700">Litebuf VII</text>
+  <text x="509" y="102" text-anchor="middle" fill="#E2E8F0" font-size="11">Wire 0x0008 -&gt; 0x00fe</text>
+  <text x="509" y="122" text-anchor="middle" fill="#94A3B8" font-size="10">16-Credit Ring</text>
+  <text x="509" y="140" text-anchor="middle" fill="#94A3B8" font-size="10">eventfd OOO Wait</text>
+  <text x="509" y="158" text-anchor="middle" fill="#94A3B8" font-size="10">36-bit DMA-BUF IOVA</text>
+  <text x="509" y="178" text-anchor="middle" fill="#64748B" font-size="9.5">seq &lt; 2^32 enforced</text>
+
+  <line x1="592" y1="123" x2="618" y2="123" stroke="#3ECF8E" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="622" y="54" width="154" height="138" rx="10" fill="#171E29" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="699" y="80" text-anchor="middle" fill="#F2EFE9" font-size="12.5" font-weight="700">/dev/edgetpu-soc</text>
+  <text x="699" y="102" text-anchor="middle" fill="#E2E8F0" font-size="11">buenos.ko (ABI 1.4)</text>
+  <text x="699" y="122" text-anchor="middle" fill="#94A3B8" font-size="10">ioctl 0xED nr=37/38</text>
+  <text x="699" y="140" text-anchor="middle" fill="#94A3B8" font-size="10">/dev/dma_heap/system</text>
+  <text x="699" y="158" text-anchor="middle" fill="#94A3B8" font-size="10">EDGETPU_MAP_DMABUF</text>
+  <text x="699" y="178" text-anchor="middle" fill="#64748B" font-size="9.5">Direct Kernel Path</text>
+
+  <line x1="776" y1="123" x2="802" y2="123" stroke="#3ECF8E" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="806" y="54" width="150" height="138" rx="10" fill="#171E29" stroke="#3ECF8E" stroke-width="1.5"/>
+  <text x="881" y="80" text-anchor="middle" fill="#3ECF8E" font-size="12.5" font-weight="700">4x4 PE Mesh</text>
+  <text x="881" y="102" text-anchor="middle" fill="#E2E8F0" font-size="11">SNAKE_16 Serpentine</text>
+  <text x="881" y="122" text-anchor="middle" fill="#94A3B8" font-size="10">2x RV64GCV Cores</text>
+  <text x="881" y="140" text-anchor="middle" fill="#94A3B8" font-size="10">768 KiB Narrow SRAM</text>
+  <text x="881" y="158" text-anchor="middle" fill="#94A3B8" font-size="10">FP32-RNE + 0x640 LUT</text>
+  <text x="881" y="178" text-anchor="middle" fill="#64748B" font-size="9.5">1.12 GHz Silicon</text>
+
+  <text x="24" y="213" fill="#64748B" font-size="10">Clean-room userspace stack · User supplies local ext[1] RV64 DIVE interpreter on unlocked Pixel device</text>
+</svg>

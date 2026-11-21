@@ -87,7 +87,7 @@ export const researchPresentation: Record<string, { title: string; steps: string
   'antigravity-thinker-talker-voice-tunnel': {
     title: 'Antigravity Thinker-Talker voice tunnel',
     steps: ['16 kHz boxcar capture -> /voice/ws', 'Talker stream <-> /voice/tunnel RPCs', '20 ms ramp barge-in + spokenChars'],
-    related: ['chatgpt-codex-quicksilver-webrtc-and-sonora-voice', 'notebooklm-boq-rpc-surface-and-enterprise-boundary']
+    related: ['chatgpt-codex-quicksilver-webrtc-and-sonora-voice', 'notebooklm-boq-rpc-surface-and-enterprise-boundary', 'freetpu-pixel-tensor-g5-baremetal-runtime']
   },
   'grok-bot-sand-coordinator-and-vm-boundaries': {
     title: 'Grok Bot Sand coordinator and VM boundary',
@@ -123,5 +123,10 @@ export const researchPresentation: Record<string, { title: string; steps: string
     title: 'Coinbase Advanced Trade, OAuth MCP and sandbox',
     steps: ['ES256 view-only / OAuth MCP', 'Preview + cursor/decimal quirks', 'Spot vs derivatives/wallet fence'],
     related: ['schwab-treasury-and-brokerage-contract-boundaries', 'xero-hybrid-mfe-and-reconciliation-boundaries', 'digits-source-ledger-boundary']
+  },
+  'freetpu-pixel-tensor-g5-baremetal-runtime': {
+    title: 'FreeTPU: Pixel Tensor G5 bare-metal runtime & llama.cpp',
+    steps: ['DGC0 + VLIW ISA compile-diff recovery', 'Litebuf VII + libopenbuenos zero-.so runtime', 'Dynamic param_slice LLM + W8A16 (BF16) GEMM'],
+    related: ['antigravity-thinker-talker-voice-tunnel', 'claude-code-projects-hearth-and-reply-gate', 'signal-pqxdh-sealed-sender-and-linked-device-boundaries']
   }
 };

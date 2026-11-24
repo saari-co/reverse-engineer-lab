@@ -15,7 +15,7 @@ test('every seed distillation validates and aligns 1:1 with researchPresentation
   const seedRaw=fs.readFileSync(new URL('../seed/seed.json',import.meta.url),'utf8');
   const seed=JSON.parse(seedRaw);
   const items=seed.content.distillations as Array<{slug:string;status:string;data:Record<string,unknown>}>;
-  assert.equal(items.length,26);
+  assert.equal(items.length,43);
   const slugs=new Set(items.map(i=>i.slug));
   assert.deepEqual([...slugs].sort(),Object.keys(researchPresentation).sort());
   for(const item of items){
@@ -49,7 +49,7 @@ test('every seed distillation validates and aligns 1:1 with researchPresentation
       assert.equal(fs.existsSync(new URL('../public'+pres.avatar.src,import.meta.url)),true,`${item.slug} avatar.src`);
     }
   }
-  for(const forbidden of [/\/Users\//,/\/home\/[a-z0-9_-]+\//i,/\bev_[0-9a-f]{16,}/i,/\bjrr_[0-9a-f]{16,}/i,/\brol_[0-9a-f]{16,}/i,/\b(sk-[A-Za-z0-9]{16,}|ghp_[A-Za-z0-9]{16,}|GOCSPX-[A-Za-z0-9_-]+)/]){
+  for(const forbidden of [/\/Users\//,/\/home\/[a-z0-9_-]+\//i,/\bev_[0-9a-f]{16,}/i,/\bjrr_[0-9a-f]{16,}/i,/\brol_[0-9a-f]{16,}/i,/\b(sk-[A-Za-z0-9]{16,}|ghp_[A-Za-z0-9]{16,}|GOCSPX-[A-Za-z0-9_-]+)/,/growfunkybeans/i,/first-citizens/i,/dinkuskit/i,/smoky/i,/firebed/i,/rea-lab/i,/saari-co\/x-api/i,/treasury-cli/i,/treasury-mcp-app/i,/ghostproxy/i,/swarmpocket/i,/\bbobby\b/i,/\bryan\b/i]){
     assert.equal(forbidden.test(seedRaw),false,`Forbidden pattern ${forbidden} in seed.json`);
   }
 });
